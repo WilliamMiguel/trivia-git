@@ -91,41 +91,39 @@ intentos = 1
 while True:
     print(Fore.MAGENTA + f"\nIntento N° {intentos}")
 
-    letra_respuestas = []  # Almacena las alternativas correctas
+    letrasRespuestas = []  # Almacena las alternativas correctas
     puntos_intento = []  # Almacena la puntuación en cada intento
 
     # Lista de preguntas del 1 al 10 en desorden
-    preguntasAleatorias = random.sample(
-        range(1, len(preguntas)+1), len(preguntas))
+    preguntasAleatorias = random.sample(range(1, len(preguntas)+1), len(preguntas))
 
-    for i in range(len(preguntas)):
-        letra_alternativa = []  # Almacena las alternativas disponibles
+    for numero in preguntas:
+        letrasDisponibles = []  # Almacena las alternativas disponibles
         # Muestra la pregunta
-        print(Fore.CYAN + f"\n{i+1}) {preguntas.get(preguntasAleatorias[i])}")
-        alternativasAleatorias = random.sample(range(0, len(alternativas[i+1])), len(alternativas[i+1]))  # lista de alternativas en desorden
+        print(Fore.CYAN + f"\n{numero}) {preguntas[preguntasAleatorias[numero-1]]}")
 
-        for j in range(len(alternativas[i+1])):  # Muestra las alternativas
-            print(
-                f"    {chr(j+97)}) {alternativas[preguntasAleatorias[i]][alternativasAleatorias[j]]}")
+        alternativasAleatorias = random.sample(range(0, len(alternativas[preguntasAleatorias[numero-1]])), len(alternativas[preguntasAleatorias[numero-1]]))
+        for letra in range(len(alternativas[preguntasAleatorias[numero-1]])):  # Muestra las alternativas
+            print(f"    {chr(letra+97)}) {alternativas[preguntasAleatorias[numero-1]][alternativasAleatorias[letra]]}")
             # Añade la siguiente letra de alternativa "a", "b", "c", "d", ...
-            letra_alternativa.append(chr(j+97))
+            letrasDisponibles.append(chr(letra+97))
             # Comprueba la alternativa correcta
-            if alternativas[preguntasAleatorias[i]][alternativasAleatorias[j]] == respuestas.get(preguntasAleatorias[i]):
+            if alternativas[preguntasAleatorias[numero-1]][alternativasAleatorias[letra]] == respuestas[preguntasAleatorias[numero-1]]:
                 # Almacena la alternativa correcta
-                letra_respuestas.append(chr(j+97))
+                letrasRespuestas.append(chr(letra+97))
 
         while True:
             time.sleep(0.25)
             respuesta_Usuario = input("\n    Ingresa tu respuesta: ").lower()
-            if respuesta_Usuario in letra_alternativa:
+            if respuesta_Usuario in letrasDisponibles:
                 break
 
         # Comprueba si la respuesta es correcta
-        if respuesta_Usuario == letra_respuestas[i]:
-            print(Fore.GREEN + f"\nRespuesta correcta")
+        if respuesta_Usuario == letrasRespuestas[numero-1]:
+            print(Fore.GREEN + "\nRespuesta correcta")
             puntos_intento.append(puntos_pos)
         else:
-            print(Fore.RED + f"\nRespuesta incorrecta")
+            print(Fore.RED + "\nRespuesta incorrecta")
             puntos_intento.append(-puntos_neg)
 
     #-------------Fin de Preguntas------------------------------------
