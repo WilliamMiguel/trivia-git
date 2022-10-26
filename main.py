@@ -68,20 +68,24 @@ while True:
     letrasRespuestas = []  # Almacena las alternativas correctas
     puntos_intento = []  # Almacena la puntuación en cada intento
 
-    #Lista de preguntas del 1 al 10 en desorden
+    # Lista de preguntas del 1 al 10 en desorden
     ordenPreguntas = random.sample(range(1, len(datos)+1), len(datos))
 
     for numero in datos:
         letrasDisponibles = []  # Almacena las alternativas disponibles
         # Muestra la pregunta
-        print(Fore.CYAN +"\n"+numero+")"+" "+datos[str(ordenPreguntas[int(numero)-1])]["Pregunta"])
+        print(Fore.CYAN + "\n"+numero+")"+" " +
+              datos[str(ordenPreguntas[int(numero)-1])]["Pregunta"])
 
-        #Almacena cuántas alternativas existen
-        cantidadAlternativas = len(datos[str(ordenPreguntas[int(numero)-1])]["alternativas"])
-        #Lista para desordenar las alternativas
-        ordenAlternativas = random.sample(range(0, cantidadAlternativas), cantidadAlternativas)
+        # Almacena cuántas alternativas existen
+        cantidadAlternativas = len(
+            datos[str(ordenPreguntas[int(numero)-1])]["alternativas"])
+        # Lista para desordenar las alternativas
+        ordenAlternativas = random.sample(
+            range(0, cantidadAlternativas), cantidadAlternativas)
         for letra in range(cantidadAlternativas):  # Muestra las alternativas
-            print("    " + chr(letra+97) + ")", datos[str(ordenPreguntas[int(numero)-1])]["alternativas"][letra])
+            print("    " + chr(letra+97) + ")",
+                  datos[str(ordenPreguntas[int(numero)-1])]["alternativas"][letra])
             # Guarda la siguiente letra de alternativa "a", "b", "c", "d", ...
             letrasDisponibles.append(chr(letra+97))
             # Comprueba la alternativa correcta
