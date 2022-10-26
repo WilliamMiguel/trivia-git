@@ -1,0 +1,105 @@
+{
+    "1": {
+        "Pregunta": "¿En qué año inició la Reforma Protestante?",
+        "alternativas": [
+            "1605",
+            "1517",
+            "1532",
+            "1455",
+            "asdasdasdasd"
+        ],
+        "Respuesta": "1517"
+    },
+    "2": {
+        "Pregunta": "¿Quién inició la Reforma Protestante?",
+        "alternativas": [
+            "Cristóbal Colón",
+            "Leonardo da Vinci",
+            "Martín Lutero",
+            "René Descartes"
+        ],
+        "Respuesta": "Martín Lutero"
+    },
+    "3": {
+        "Pregunta": "¿En qué año murió Martín Lutero?",
+        "alternativas": [
+            "1546",
+            "1500",
+            "1605",
+            "1515",
+            "asdasdasdasdasda"
+        ],
+        "Respuesta": "1546"
+    },
+    "4": {
+        "Pregunta": "¿Por qué Martín Lutero ingresó al monasterio?",
+        "alternativas": [
+            "Quería ser santo",
+            "Le gustaba estudiar la Biblia",
+            "Hizo una promesa a una santa",
+            "Sus papás le obligaron"
+        ],
+        "Respuesta": "Hizo una promesa a una santa"
+    },
+    "5": {
+        "Pregunta": "¿En qué país tuvo sus inicios la Reforma Protestante?",
+        "alternativas": [
+            "Perú",
+            "España",
+            "Alemania",
+            "Inglaterra"
+        ],
+        "Respuesta": "Alemania"
+    },
+    "6": {
+        "Pregunta": "¿Cuál fue el tema central por el cual se dió la Reforma?",
+        "alternativas": [
+            "La iglesia",
+            "Los papas",
+            "La santificación",
+            "La justificación"
+        ],
+        "Respuesta": "La santificación"
+    },
+    "7": {
+        "Pregunta": "¿Qué fuentes de revelación especial considera la iglesia católica romana?",
+        "alternativas": [
+            "La iglesia",
+            "Los santos",
+            "La costumbre",
+            "Ninguna de las alternativas",
+            "asdasdasdas"
+        ],
+        "Respuesta": "Ninguna de las alternativas"
+    },
+    "8": {
+        "Pregunta": "De los siguientes lemas, uno fue parte de la batalla de la Reforma, ¿cuál es?",
+        "alternativas": [
+            "Post Tenebras Lux",
+            "Sola Scriptura",
+            "Sola Gratia",
+            "Coram Deo"
+        ],
+        "Respuesta": "Sola Scriptura"
+    },
+    "9": {
+        "Pregunta": "¿Quién dijo: Puedes quemar este ganso, si así lo quieren, pero vendrá después de mí un cisne, a quien no podrán silenciar?",
+        "alternativas": [
+            "Juan Huss",
+            "Juan Calvino",
+            "Martín Lutero",
+            "John Knox"
+        ],
+        "Respuesta": "Juan Huss"
+    },
+    "10": {
+        "Pregunta": "¿Cuántas tesis clavó Lutero en la iglesia de Todos los Santos de Wittenberg?",
+        "alternativas": [
+            "85 tesis",
+            "95 tesis",
+            "90 tesis",
+            "93 tesis"
+        ],
+        "Respuesta": "95 tesis"
+    }
+}
