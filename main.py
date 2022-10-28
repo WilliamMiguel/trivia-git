@@ -55,7 +55,7 @@ puntos_pos = puntaje("acumular")
 puntos_neg = puntaje("restar")
 puntaje_Inicial = 0
 
-with open("data.json", encoding='utf-8') as archivo:
+with open("dataprueba.json", encoding='utf-8') as archivo:
     datos = json.load(archivo)
 
 numero_intentos = []
@@ -69,27 +69,24 @@ while True:
     puntos_intento = []  # Almacena la puntuación en cada intento
 
     # Lista de preguntas del 1 al 10 en desorden
-    ordenPreguntas = random.sample(range(1, len(datos)+1), len(datos))
+    ordenPreguntas = [i for i in range(len(datos["Valotario"]))]
+    random.shuffle(ordenPreguntas)
 
-    for numero in datos:
+    for indice, pregunta in enumerate(ordenPreguntas):
         letrasDisponibles = []  # Almacena las alternativas disponibles
         # Muestra la pregunta
-        print(Fore.CYAN + "\n"+numero+")"+" " +
-              datos[str(ordenPreguntas[int(numero)-1])]["Pregunta"])
+        print(Fore.CYAN + "\n" + str(indice+1) + ") " + datos["Valotario"][pregunta]["Pregunta"])
 
-        # Almacena cuántas alternativas existen
-        cantidadAlternativas = len(
-            datos[str(ordenPreguntas[int(numero)-1])]["alternativas"])
-        # Lista para desordenar las alternativas
-        ordenAlternativas = random.sample(
-            range(0, cantidadAlternativas), cantidadAlternativas)
-        for letra in range(cantidadAlternativas):  # Muestra las alternativas
-            print("    " + chr(letra+97) + ")",
-                  datos[str(ordenPreguntas[int(numero)-1])]["alternativas"][letra])
+        # Desordenar las alternativas
+        ordenAlternativas = [i for i in range(len(datos["Valotario"][pregunta]["Alternativas"]))]
+        random.shuffle(ordenAlternativas)
+
+        for letra, alternativa in enumerate(ordenAlternativas):  # Muestra las alternativas
+            print("    " + chr(letra+97) + ") " + datos["Valotario"][pregunta]["Alternativas"][alternativa])
             # Guarda la siguiente letra de alternativa "a", "b", "c", "d", ...
             letrasDisponibles.append(chr(letra+97))
             # Comprueba la alternativa correcta
-            if datos[str(ordenPreguntas[int(numero)-1])]["alternativas"][letra] == datos[str(ordenPreguntas[int(numero)-1])]["Respuesta"]:
+            if datos["Valotario"][pregunta]["Alternativas"][alternativa] == datos["Valotario"][pregunta]["Respuesta"]:
                 # Almacena la alternativa correcta
                 letrasRespuestas.append(chr(letra+97))
 
@@ -100,7 +97,7 @@ while True:
                 break
 
         # Comprueba si la respuesta es correcta
-        if respuesta_Usuario == letrasRespuestas[int(numero)-1]:
+        if respuesta_Usuario == letrasRespuestas[indice]:
             print(Fore.GREEN + "\nRespuesta correcta")
             puntos_intento.append(puntos_pos)
         else:
@@ -109,7 +106,7 @@ while True:
 
     # -------------Fin de Preguntas------------------------------------
 
-    if sum(puntos_intento) == puntos_pos * len(datos):
+    if sum(puntos_intento) == puntos_pos * len(datos["Valotario"]):
         print(Fore.MAGENTA +
               "\n¡FELICITACIONES! Eres un crack en los temas de la Reforma")
 
@@ -154,9 +151,9 @@ while True:
         # Se muestran las respuestas
         time.sleep(1)
         print(Fore.LIGHTMAGENTA_EX + "Las respuestas correctas son:\n")
-        for i in datos:
-            print(Fore.CYAN + datos[i]["Pregunta"])
-            print(Fore.LIGHTGREEN_EX + "   "+datos[i]["Respuesta"]+"\n")
+        for i in range(len(datos["Valotario"])):
+            print(Fore.CYAN + datos["Valotario"][i]["Pregunta"])
+            print(Fore.LIGHTGREEN_EX + "   "+datos["Valotario"][i]["Respuesta"]+"\n")
 
         print("--------------------------------------\n")
         print(Fore.RED + f"Gracias por jugar {nombre}. Hasta pronto\n")
