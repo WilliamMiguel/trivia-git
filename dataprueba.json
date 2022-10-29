@@ -103,6 +103,16 @@
                 "93 tesis"
             ],
             "Respuesta": "95 tesis"
+        },
+        {
+            "Pregunta": "¿Qué significa simul iustus et peccator?",
+            "Alternativas":[
+                "Simultáneamente justo y pecador",
+                "Justicia y pecado son similares",
+                "El pecador es justo",
+                "Mi justicia y pecado al mismo tiempo"
+            ],
+            "Respuesta": "Simultáneamente justo y pecador"
         }
     ]
 }

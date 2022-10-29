@@ -61,6 +61,7 @@ with open("dataprueba.json", encoding='utf-8') as archivo:
 numero_intentos = []
 puntaje_intentos = []
 intentos = 1
+numeroPreguntas = 10
 
 while True:
     print(Fore.MAGENTA + f"\nIntento N° {intentos}")
@@ -69,7 +70,7 @@ while True:
     puntos_intento = []  # Almacena la puntuación en cada intento
 
     # Lista de preguntas del 1 al 10 en desorden
-    ordenPreguntas = [i for i in range(len(datos["Valotario"]))]
+    ordenPreguntas = random.sample(range(len(datos["Valotario"])),10)
     random.shuffle(ordenPreguntas)
 
     for indice, pregunta in enumerate(ordenPreguntas):
@@ -151,7 +152,7 @@ while True:
         # Se muestran las respuestas
         time.sleep(1)
         print(Fore.LIGHTMAGENTA_EX + "Las respuestas correctas son:\n")
-        for i in range(len(datos["Valotario"])):
+        for i in ordenPreguntas:
             print(Fore.CYAN + datos["Valotario"][i]["Pregunta"])
             print(Fore.LIGHTGREEN_EX + "   "+datos["Valotario"][i]["Respuesta"]+"\n")
 
