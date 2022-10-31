@@ -1,109 +1,85 @@
 import json
 import os
 import random
+import re
 os.system("cls")
 
-with open("datacopy.json", encoding='utf-8') as archivo:
-    info = json.load(archivo)
+# with open("datacopy.json", encoding='utf-8') as archivo:
+#     info = json.load(archivo)
 
-class Pregunta:
-    def __init__(self, enunciado: str, alternativas: list, respuesta: str):
-        self.__enunciado = enunciado
-        self.__alternativas = alternativas
-        self.__respuesta = respuesta
-    
-    def mostrarPregunta(self):
-        #     print("\n" + str(indice+1) + ") " + datos["Valotario"][pregunta]["Pregunta"])
-        print(self.__enunciado)
-        random.shuffle(self.__alternativas)
-        for alternativa in self.__alternativas:
-            print("    " + alternativa)
-        
-# print(cuestionario[1]["Pregunta"])
-# pregunta1 = Pregunta(info[0]["Pregunta"],info[0]["Alternativas"],info[0]["Respuesta"])
-# pregunta1.mostrarPregunta()
+def esNumero(funcion):
+    def auxiliar(entrada):
+        funcion(entrada)
+        while entrada != "" and len(list(entrada)) > 2 or not entrada.isnumeric() or int(entrada) == 0:
+            entrada = input("Ingresa un valor entre 0 y 9: ")
+        return entrada
+    return auxiliar
 
-listaPreguntas = []
+@esNumero
+def pedirValores(valor):
+    return valor
 
-for cuestionario in info:
-    enunciado = cuestionario["Pregunta"]
-    alternativas = cuestionario["Alternativas"]
-    respuesta = cuestionario["Respuesta"]
-    pregunta = Pregunta(enunciado,alternativas,respuesta)
-    listaPreguntas.append(pregunta)
+dato = "0"
+dato3= pedirValores(dato)
 
-# Lista de preguntas del 1 al 10 en desorden
-# ordenPreguntas = random.sample(range(len(datos["Valotario"])),10)
-random.shuffle(listaPreguntas)
-
-for pregunta in listaPreguntas:
-    pregunta.mostrarPregunta()
-    print("")
+print(dato3)
 
 
 
 
 
 
+# ----CLASE PREGUNTA----------------------------
 
+# class Pregunta:
+#     def __init__(self, enunciado: str, alternativas: list, respuesta: str):
+#         self.__enunciado = enunciado
+#         self.__alternativas = alternativas
+#         self.__respuesta = respuesta
+#         self.__clave = ""
+#         self.__letras = []
 
+#     def Pregunta(self):
+#         return self.__enunciado
 
-numero_intentos = []
-puntaje_intentos = []
-intentos = 1
-numeroPreguntas = 10
+#     def Alternativas(self):
+#         random.shuffle(self.__alternativas)
+#         for alternativa in self.__alternativas:
+#             self.__letras.append(chr(self.__alternativas.index(alternativa)+97))
+#             print(f"    {chr(self.__alternativas.index(alternativa)+97)}) {alternativa}")
+#             if alternativa == self.__respuesta:
+#                 self.__clave = chr(self.__alternativas.index(alternativa)+97)
 
-letrasRespuestas = []  # Almacena las alternativas correctas
-puntos_intento = []  # Almacena la puntuación en cada intento
+#     def alternativaCorrecta(self):
+#         usuarioAlternativa = input("Ingrese su respuesta: ").lower()
+#         while usuarioAlternativa not in self.__letras:
+#             usuarioAlternativa = input("Ingrese su respuesta: ").lower()
+#         if usuarioAlternativa == self.__clave:
+#             print("\nRespuesta correcta\n")
+#             return True
+#         else:
+#             print("\nRespuesta incorrecta\n")
 
-# Lista de preguntas del 1 al 10 en desorden
-# ordenPreguntas = random.sample(range(len(datos["Valotario"])),10)
-# random.shuffle(ordenPreguntas)
+# listaPreguntas = []
 
+# for cuestionario in info:
+#     enunciado = cuestionario["Pregunta"]
+#     alternativas = cuestionario["Alternativas"]
+#     respuesta = cuestionario["Respuesta"]
+#     pregunta = Pregunta(enunciado,alternativas,respuesta)
+#     listaPreguntas.append(pregunta)
 
+# # Lista de preguntas del 1 al 10 en desorden
+# random.shuffle(listaPreguntas)
 
-# for indice, pregunta in enumerate(ordenPreguntas):
-#     letrasDisponibles = []  # Almacena las alternativas disponibles
-#     # Muestra la pregunta
-#     print("\n" + str(indice+1) + ") " + datos["Valotario"][pregunta]["Pregunta"])
-
-#     # Desordenar las alternativas
-#     ordenAlternativas = [i for i in range(len(datos["Valotario"][pregunta]["Alternativas"]))]
-#     random.shuffle(ordenAlternativas)
-
-#     for letra, alternativa in enumerate(ordenAlternativas):  # Muestra las alternativas
-#         print("    " + chr(letra+97) + ") " + datos["Valotario"][pregunta]["Alternativas"][alternativa])
-#         # Guarda la siguiente letra de alternativa "a", "b", "c", "d", ...
-#         letrasDisponibles.append(chr(letra+97))
-#         # Comprueba la alternativa correcta
-#         if datos["Valotario"][pregunta]["Alternativas"][alternativa] == datos["Valotario"][pregunta]["Respuesta"]:
-#             # Almacena la alternativa correcta
-#             letrasRespuestas.append(chr(letra+97))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# numeroPreguntas = 10
+# for pregunta in listaPreguntas:
+#     if listaPreguntas.index(pregunta) == numeroPreguntas:
+#         break
+#     print(f"{listaPreguntas.index(pregunta)+1}) {pregunta.Pregunta()}")
+#     pregunta.Alternativas()
+#     print("")
+#     pregunta.alternativaCorrecta()
 
 
 # nombre = input("Ingresa tu nombre (min 3 letras) y presiona Enter: ")
