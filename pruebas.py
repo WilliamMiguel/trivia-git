@@ -7,26 +7,35 @@ os.system("cls")
 # with open("datacopy.json", encoding='utf-8') as archivo:
 #     info = json.load(archivo)
 
-def esNumero(funcion):
-    def auxiliar(entrada):
-        funcion(entrada)
-        while entrada != "" and len(list(entrada)) > 2 or not entrada.isnumeric() or int(entrada) == 0:
-            entrada = input("Ingresa un valor entre 0 y 9: ")
-        return entrada
+
+def numeroValido(funcion):
+    def auxiliar(entrada, valorcero):
+        funcion(entrada, valorcero)
+        if not valorcero: #Para valorcero = False
+            while not entrada.isnumeric() or entrada == "0" or int(entrada) > 99:
+                entrada = input(f"Ingresa un número entero positivo válido: ")
+            entrada = int(entrada)
+            return entrada
+        else:
+            while not entrada.isnumeric() or int(entrada) != 1 and int(entrada) != 0:
+                entrada = input(f"Ingresa 0 o 1: ")
+            entrada = int(entrada)
+            return entrada
     return auxiliar
 
-@esNumero
-def pedirValores(valor):
-    return valor
-
-dato = "0"
-dato3= pedirValores(dato)
-
-print(dato3)
+@numeroValido
+def puntos(entrada, cero: bool):
+    return entrada, cero
 
 
+entrada = input("Ingresa la cantidad de preguntas que deseas resolver (máx. 99): ")
+# entrada = input("Ingresa 0 o 1: ")
+# print(list(valor2))
+
+puntos(entrada, False)
 
 
+# print(puntos(entrada, valor1, valor2))
 
 
 # ----CLASE PREGUNTA----------------------------
