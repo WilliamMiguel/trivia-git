@@ -8,12 +8,10 @@ init(autoreset=True)
 os.system("cls")
 
 # Importa las preguntas
-with open("datacopy.json", encoding='utf-8') as archivo:
+with open("cuestionario.json", encoding='utf-8') as archivo:
     info = json.load(archivo)
 
 # Función para efecto de sorteo de número - ruleta
-
-
 def efectoAleatorio():
     '''Realiza un efecto de elegir un número aleatorio'''
     tiempoInicio = time.time()
@@ -24,8 +22,6 @@ def efectoAleatorio():
         duracion = tiempoFin - tiempoInicio
 
 # DECORADOR PARA CONFIRMAR NÚMERO
-
-
 def numeroValido(funcion):
     def auxiliar(entrada, valorcero, limite):
         funcion(entrada, valorcero, limite)
@@ -55,12 +51,12 @@ time.sleep(2)
 patronNombre = re.compile('[a-z]+[a-z]+[a-z]')
 
 while True:
-    nombre = input("Ingresa tu nombre (min 3 letras) y presiona Enter: ")
+    nombre = input(Fore.LIGHTMAGENTA_EX + "Ingresa tu nombre (min. 3 letras) y presiona Enter: ")
     dato = re.search(patronNombre, nombre)
     if nombre != "" and type(dato) == re.Match:
         break
 
-cantidadPreguntas = input(f"Ingresa la cantidad de preguntas que quieres responder (máx. {len(info)}): ")
+cantidadPreguntas = input(Fore.LIGHTMAGENTA_EX + f"Ingresa la cantidad de preguntas que quieres responder (máx. {len(info)}): ")
 cantidadPreguntas = puntos(cantidadPreguntas, False, len(info))
 puntos_pos = 1
 puntos_neg = 1
@@ -70,11 +66,6 @@ Cada vez que aciertes una respuesta sumarás {Fore.GREEN}{puntos_pos} punto{Fore
 
 time.sleep(2)
 
-# El usuario ingresa los puntos con los que quiere jugar
-# puntos_pos = input(Fore.GREEN + "Ingresa los puntos a sumar por respuesta correcta: ")
-# puntos_pos = puntos(puntos_pos, False, None)
-# puntos_neg = input(Fore.RED + "Ingresa los puntos a restar por respuesta incorrecta: ")
-# puntos_neg = puntos(puntos_neg, False)
 puntaje_Inicial = 0
 numero_intentos = []
 puntaje_intentos = []
@@ -91,14 +82,11 @@ while True:
         clave = ""  # Almacena la alternativas correctas
         print(Fore.CYAN + "\n" + str(numero+1) + ") " +
               cuestionario["Pregunta"])  # Muestra la pregunta
-        # Desordena las alternativas
-        random.shuffle(cuestionario["Alternativas"])
-        # Muestra las alternativas
-        for letra, alternativa in enumerate(cuestionario["Alternativas"]):
+        random.shuffle(cuestionario["Alternativas"]) # Desordena las alternativas
+        for letra, alternativa in enumerate(cuestionario["Alternativas"]): # Muestra las alternativas
             print("    " + chr(letra + 97) + ") " + alternativa)
             letras.append(chr(letra + 97))  # Añade una alternativa disponible
-            # Guarda la alternativa correcta
-            if alternativa == cuestionario["Respuesta"]:
+            if alternativa == cuestionario["Respuesta"]: # Guarda la alternativa correcta
                 clave = chr(letra + 97)
         print("")
         while True:
@@ -114,6 +102,7 @@ while True:
             puntos_intento.append(-puntos_neg)
 
     # -------------Fin de Preguntas------------------------------------
+
     print("\n--------------------------------------")
     puntajeprevio = sum(puntos_intento)
     if puntajeprevio < 0:
@@ -126,7 +115,8 @@ while True:
         print(Fore.MAGENTA + "¡FELICITACIONES! Eres un crack en los temas de la Reforma")
 
     print(Fore.YELLOW + "Aumentaremos el puntaje con números aleatorios")
-    ruleta = input(Fore.YELLOW + "\n¿Cuántas veces quieres sortear el numero? Ingresa un número entero mayor a 0: ")
+    ruleta = input(
+        Fore.YELLOW + "\n¿Cuántas veces quieres sortear el numero? Ingresa un número entero mayor a 0: ")
     ruleta = puntos(ruleta, False, 10)
 
     for i in range(ruleta):
@@ -139,22 +129,25 @@ while True:
     puntaje_intentos.append(sum(puntos_intento) + numeroRuleta)
     numero_intentos.append(intentos)  # Cantidad de intentos
 
-    print(f"\n{Fore.YELLOW}Tu puntaje final es: {round(puntaje_intentos[intentos-1],2)} puntos en tu intento N° {numero_intentos[intentos-1]}")
+    print(
+        f"\n{Fore.YELLOW}Tu puntaje final es: {round(puntaje_intentos[intentos-1],2)} puntos en tu intento N° {numero_intentos[intentos-1]}")
 
-    repetir = input(Fore.BLUE + "\nPara finalizar escribe 0. Para volver a jugar escribe 1: ")
+    repetir = input(
+        Fore.BLUE + "\nPara finalizar escribe 0. Para volver a jugar escribe 1: ")
     repetir = puntos(repetir, True, 0)
 
     if repetir == 0:
         # Se muestran los puntajes por intentos
         print("\n--------------------------------------\n")
         for i in numero_intentos:
-            print(Fore.MAGENTA + f"Intento N° {numero_intentos[i-1]}: {puntaje_intentos[i-1]} puntos")
+            print(
+                Fore.MAGENTA + f"Intento N° {numero_intentos[i-1]}: {puntaje_intentos[i-1]} puntos")
         print("\n--------------------------------------\n")
 
         # Se muestran las respuestas
         time.sleep(1)
         print(Fore.LIGHTMAGENTA_EX +
-              "Las respuestas correctas en tu último intento son:\n")
+              "Las respuestas correctas de tu último intento son:\n")
         for cuestionario in info:
             if info.index(cuestionario) == cantidadPreguntas:
                 break
