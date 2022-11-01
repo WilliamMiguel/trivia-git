@@ -112,11 +112,11 @@ while True:
     print("--------------------------------------\n")
 
     if sum(puntos_intento) == puntos_pos * cantidadPreguntas:
-        print(Fore.MAGENTA + "¡FELICITACIONES! Eres un crack en los temas de la Reforma")
+        print(Fore.MAGENTA + "¡FELICITACIONES! Eres un crack en los temas de la Reforma\n")
 
     print(Fore.YELLOW + "Aumentaremos el puntaje con números aleatorios")
     ruleta = input(
-        Fore.YELLOW + "\n¿Cuántas veces quieres sortear el numero? Ingresa un número entero mayor a 0: ")
+        Fore.YELLOW + "\n¿Cuántas veces quieres sortear el numero? Ingresa un número entero (1 - 10): ")
     ruleta = puntos(ruleta, False, 10)
 
     for i in range(ruleta):
