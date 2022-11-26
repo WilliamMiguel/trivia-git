@@ -1,4 +1,5 @@
 main_copy.py
 pruebas.py
 PreguntasRespuestas.xlsx
-env\
+env/
+.env
