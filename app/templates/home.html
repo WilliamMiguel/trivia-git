@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Trivia Protestante
+{% endblock %}
+
+{% block content %}
+
+    <h1>Trivia Protestante</h1>
+    <p>Creada por William Vilca</p>
+    <a href="{{url_for('trivia.register')}}">Registrarse</a> <br>
+    <a href="{{url_for('trivia.login')}}">Iniciar sesión</a> <br>
+    <a href="{{url_for('trivia.show_users')}}">Ver usuarios</a>
+
+{% endblock %}
