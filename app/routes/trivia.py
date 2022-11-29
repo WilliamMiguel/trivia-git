@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from app.models.user import User
+from app.models.question import Question
 from app.utils.db import db
-from app.utils.forms import UserLogin, UserRegister
+from app.utils.forms import UserLogin, UserRegister, InsertQuestion
 from flask_login import current_user, LoginManager, login_user, login_required
 
 trivia = Blueprint('trivia',__name__)
@@ -43,6 +44,30 @@ def show_users():
     users = db.users.find()
     noneuser = db.users.find_one()
     return render_template('users.html', users = users, noneuser = noneuser)
+
+@trivia.route('/questions', methods = ["GET", "POST"])
+def questions():
+    questions = db.questions.aggregate([{"$sample": {"size": 5}}])
+    nonequestion = db.questions.find_one()
+    return render_template('questions.html', questions = questions, nonequestion = nonequestion)
+
+@trivia.route('/questions/insert', methods =["GET", "POST"])
+def createQuestion():
+    form = InsertQuestion()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            question = Question(
+                form.question.data,
+                form.option1.data,
+                form.option2.data,
+                form.option3.data,
+                form.option4.data,
+                form.answer.data
+                )
+            db.questions.insert_one(question.to_json())
+            flash("Pregunta guardada", "success")
+
+    return render_template('insertQuestion.html', form = form)
 
 @trivia.errorhandler(404)
 def not_found(error = None):

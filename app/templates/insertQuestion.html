@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as f %}
+
+{% block title %}
+Ingresar pregunta - Trivia Protestante
+{% endblock %}
+
+{% block content %}
+
+    <h1>Ingresa la pregunta y sus alternativas</h1>
+    <p>
+        <a href="{{url_for('trivia.home')}}">Inicio</a>
+    </p> 
+    {{f.quick_form(form)}}
+
+{% endblock %}

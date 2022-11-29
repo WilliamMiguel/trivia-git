@@ -16,3 +16,12 @@ class UserLogin(FlaskForm):
     password = PasswordField("Contraseña", validators=[DataRequired()])
     remember_me = BooleanField("Recuérdame")
     submit = SubmitField("Ingresar")
+
+class InsertQuestion(FlaskForm):
+    question = StringField("Pregunta", validators=[DataRequired()])
+    option1 = StringField("Alternativa 1", validators=[DataRequired()])
+    option2 = StringField("Alternativa 2", validators=[DataRequired()])
+    option3 = StringField("Alternativa 3", validators=[DataRequired()])
+    option4 = StringField("Alternativa 4", validators=[DataRequired()])
+    answer = StringField("Respuesta", validators=[DataRequired()])
+    submit = SubmitField("Insertar pregunta")

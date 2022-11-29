@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Preguntas - Trivia Protestante
+{% endblock %}
+
+{% block content %}
+
+<h1>Responde las siguientes preguntas</h1>
+<p>
+    <a href="{{url_for('trivia.home')}}">Inicio</a>
+</p>
+
+<div>
+    <ol>
+        {% for question in questions %}
+        <li>
+            {{question.Pregunta}}
+        </li>
+
+        <ol type="a">
+            {% for alternative in question.Alternativas %}
+
+            <li>
+                {{alternative}}
+            </li>
+
+            {% endfor %}
+        </ol>
+        <br>
+        {% endfor %}
+    </ol>
+
+
+</div>
+
+{% endblock %}
