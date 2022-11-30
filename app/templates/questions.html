@@ -7,29 +7,31 @@ Preguntas - Trivia Protestante
 {% block content %}
 
 <h1>Responde las siguientes preguntas</h1>
-<p>
-    <a href="{{url_for('trivia.home')}}">Inicio</a>
+<p class="btn btn-primary">
+    <a href="{{url_for('trivia.home')}}" style="color: white;"><i class="fa-solid fa-house"
+            style="color: rgb(255, 255, 255);"></i> Inicio</a>
 </p>
 
+{{questions.Pregunta}}
+
 <div>
-    <ol>
-        {% for question in questions %}
-        <li>
-            {{question.Pregunta}}
-        </li>
 
-        <ol type="a">
-            {% for alternative in question.Alternativas %}
+    {% for question in questions %}
+    {{question.Pregunta}}
 
-            <li>
-                {{alternative}}
-            </li>
 
-            {% endfor %}
-        </ol>
-        <br>
-        {% endfor %}
-    </ol>
+    {% for alternative in question.Alternativas %}
+    
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-right: 0">
+        <label class="form-check-label" for="flexCheckDefault">{{alternative}}</label>
+    </div>
+
+    {% endfor %}
+
+    <br>
+    {% endfor %}
+
 
 
 </div>

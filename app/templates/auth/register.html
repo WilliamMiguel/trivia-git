@@ -8,6 +8,11 @@ Registrar usuario
 {% block content %}
 
     <h1>Registrarse</h1>
+
+    <p class="btn btn-primary">
+        <a href="{{url_for('trivia.home')}}" style="color: white;"><i class="fa-solid fa-house" style="color: rgb(255, 255, 255);"></i> Inicio</a>
+    </p> 
+
     {{f.quick_form(form)}}
 
 {% endblock %}

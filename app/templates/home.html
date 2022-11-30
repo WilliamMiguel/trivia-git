@@ -4,14 +4,21 @@
 Trivia Protestante
 {% endblock %}
 
-{% block content %}
 
+<div class="back">
+    {% block content %}
     <h1>Trivia Protestante</h1>
     <p>Creada por William Vilca</p>
-    <a href="{{url_for('trivia.register')}}">Registrarse</a> <br>
-    <a href="{{url_for('trivia.login')}}">Iniciar sesión</a> <br>
+
+    <div class="btn-group">
+        <a href="{{url_for('trivia.login')}}" class="btn btn-primary">Iniciar sesión</a>
+        <a href="{{url_for('trivia.register')}}" class="btn btn-primary">Registrarse</a>
+    </div>
+
+    <br>
     <a href="{{url_for('trivia.show_users')}}">Ver usuarios</a> <br>
     <a href="{{url_for('trivia.questions')}}">Preguntas</a> <br>
     <a href="{{url_for('trivia.createQuestion')}}">Ingresar pregunta</a>
 
-{% endblock %}
+    {% endblock %}
+</div>
