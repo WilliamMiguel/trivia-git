@@ -1,14 +1,17 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from app.models.user import User
-from app.models.question import Question
+# from app.models.mongodb.mongodb_user import User
+from app.models.mongodb.mongodbquestion import Question
 from app.models.modeluser import ModelUser
-from app.models.entities.user import User
+# from app.models.entities.user import User
 # from app.utils.db import db
-from app.utils.forms import UserLogin, UserRegister, InsertQuestion
+from app.utils.forms import FormUserLogin, FormUserRegister, FormInsertQuestion
 from flask_login import current_user, LoginManager, login_user, login_required, logout_user
 from app.utils.db import db
 from flask_wtf.csrf import CSRFProtect
 
+#MySQL
+from app.models.mysql.user import User
+from app.models.mysql.score import Score
 
 trivia = Blueprint('trivia',__name__)
 login_manager = LoginManager()
@@ -16,7 +19,7 @@ csrf = CSRFProtect()
 
 @login_manager.user_loader
 def load_user(id):
-    return ModelUser.get_by_id(db, id)
+    return User.query.get(id)
 
 @trivia.route('/')
 def home():
@@ -26,9 +29,36 @@ def home():
 def index():
     return render_template("index.html")
 
+
 @trivia.route('/register', methods = ["GET", "POST"])
 def register():
-    form = UserRegister()
+    form = FormUserRegister()
+
+    if form.validate_on_submit():
+        if User.query.filter_by(username = form.username.data).first():
+            flash("Nombre de usuario existente. Intente con otro")
+
+        elif User.query.filter_by(email = form.email.data).first():
+            flash("Email ya registrado. Intente con otro")
+
+        else:
+            user = User()
+            user.name = form.name.data
+            user.lastname = form.lastname.data
+            user.username = form.username.data
+            user.email = form.email.data
+            user.set_password(form.password.data)
+
+            db.session.add(user)
+            db.session.commit()
+
+            flash("Usuario registrado")
+
+            login_user(user, remember=True)
+
+            return redirect(url_for('trivia.register'))
+
+
     # if request.method == "POST":
     #     if form.validate_on_submit():
     #         user = User(
@@ -45,24 +75,42 @@ def register():
 
 @trivia.route('/login', methods = ["GET", "POST"])
 def login():
-    form = UserLogin()
+    if current_user.is_authenticated:
+        return redirect(url_for("trivia.questions"))
 
-    if request.method == "POST":
-        user = User(0, request.form["username"], request.form["password"])
-        logged_user = ModelUser.login(db, user)
-        if logged_user != None:
-            if logged_user.password:
-                login_user(logged_user)
-                return redirect(url_for("trivia.index"))
-            else:
-               flash("Contraseña incorrecta")
-               return render_template('./auth/login.html', form = form)
-        else:
-            flash("Usuario no encontrado")
-            return render_template('./auth/login.html', form = form)
-        # if form.validate_on_submit():
-        #     pass
-    return render_template('./auth/login.html', form = form)
+    form = FormUserLogin()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(username = form.username.data).first()
+        if user is None:
+            flash("Usuario no válido")
+            
+        elif not user.check_password(form.password.data):
+            flash("Contraseña incorrecta")
+
+        login_user(user, remember=form.remember_me.data)
+
+        return redirect(url_for('trivia.index'))
+    
+    return render_template("./auth/login.html", form = form)
+
+
+    # if request.method == "POST":
+    #     user = User(0, request.form["username"], request.form["password"])
+    #     logged_user = ModelUser.login(db, user)
+    #     if logged_user != None:
+    #         if logged_user.password:
+    #             login_user(logged_user)
+    #             return redirect(url_for("trivia.index"))
+    #         else:
+    #            flash("Contraseña incorrecta")
+    #            return render_template('./auth/login.html', form = form)
+    #     else:
+    #         flash("Usuario no encontrado")
+    #         return render_template('./auth/login.html', form = form)
+    #     # if form.validate_on_submit():
+    #     #     pass
+    # return render_template('./auth/login.html', form = form)
 
 @trivia.route('/logout')
 def logout():
@@ -87,7 +135,7 @@ def questions():
 
 @trivia.route('/admin/questions/insert', methods =["GET", "POST"])
 def createQuestion():
-    form = InsertQuestion()
+    form = FormInsertQuestion()
     if request.method == "POST":
         if form.validate_on_submit():
             question = Question(
@@ -108,4 +156,4 @@ def status_404(error = None):
     return render_template('E404.html'), 404
 
 def status_401(error = None):
-    return redirect(url_for('trivia.index')), 401
+    return render_template("./auth/unauth.html")

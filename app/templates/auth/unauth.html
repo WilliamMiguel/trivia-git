@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+No autorizado
+{% endblock %}
+
+{% block content %}
+
+<h1>Hola, no tienes acceso a la página solicitada</h1>
+<a class = "btn btn-secondary" href="{{url_for('trivia.login')}}" style="color: white;">Iniciar sesión</a>
+<a class = "btn btn-secondary" href="{{url_for('trivia.home')}}" style="color: white;">Regresar a la página principal</a>
+<!-- <a class = "btn btn-secondary" href="{{url_for('trivia.logout')}}">Cerrar sesión</a> -->
+{% endblock %}

@@ -2,8 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, EmailField
 from wtforms.validators import DataRequired
 
-
-class UserRegister(FlaskForm):
+class FormUserRegister(FlaskForm):
     name = StringField('Nombres', validators=[DataRequired()])
     lastname = StringField('Apellidos', validators=[DataRequired()])
     username = StringField('Nombre de usuario', validators=[DataRequired()])
@@ -11,13 +10,13 @@ class UserRegister(FlaskForm):
     password = PasswordField("Contraseña", validators=[DataRequired()])
     submit = SubmitField("Registrar")
 
-class UserLogin(FlaskForm):
+class FormUserLogin(FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired()])
     password = PasswordField("Contraseña", validators=[DataRequired()])
     remember_me = BooleanField("Recuérdame")
     submit = SubmitField("Ingresar")
 
-class InsertQuestion(FlaskForm):
+class FormInsertQuestion(FlaskForm):
     question = StringField("Pregunta", validators=[DataRequired()])
     option1 = StringField("Alternativa 1", validators=[DataRequired()])
     option2 = StringField("Alternativa 2", validators=[DataRequired()])

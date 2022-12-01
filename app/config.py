@@ -2,7 +2,10 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    MYSQL_HOST = "localhost"
-    MYSQL_USER = "root"
-    MYSQL_PASSWORD = "Wllm.mgl34"
-    MYSQL_DB = "trivia"
+    # MYSQL_HOST = "localhost"
+    # MYSQL_USER = "root"
+    # MYSQL_PASSWORD = "Wllm.mgl34"
+    # MYSQL_DB = "trivia"
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
+    

@@ -5,14 +5,28 @@
 Registrar usuario
 {% endblock %}
 
+
+
 {% block content %}
 
-    <h1>Registrarse</h1>
+<h1>Registrarse</h1>
 
-    <p class="btn btn-primary">
-        <a href="{{url_for('trivia.home')}}" style="color: white;"><i class="fa-solid fa-house" style="color: rgb(255, 255, 255);"></i> Inicio</a>
-    </p> 
+<p class="btn btn-primary">
+    <a href="{{url_for('trivia.home')}}" style="color: white;"><i class="fa-solid fa-house"
+            style="color: rgb(255, 255, 255);"></i> Inicio</a>
+</p>
 
-    {{f.quick_form(form)}}
+{{f.quick_form(form)}}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-primary alert-dismissible" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 
 {% endblock %}

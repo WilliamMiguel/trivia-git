@@ -11,8 +11,10 @@ Trivia Protestante
     <p>Creada por William Vilca</p>
 
     <div class="btn-group">
+        {% if current_user.is_anonymous %}
         <a href="{{url_for('trivia.login')}}" class="btn btn-primary">Iniciar sesión</a>
         <a href="{{url_for('trivia.register')}}" class="btn btn-primary">Registrarse</a>
+        {% endif %}
     </div>
 
     <br>
